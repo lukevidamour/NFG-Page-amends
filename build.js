@@ -31,6 +31,8 @@ function listPages(dir, base = '') {
 // ---------- In-page transforms (run inside the browser) ----------
 
 function commonTransform({ office }) {
+  // Wix embeds whose target is injected by script at runtime; blank them so nothing 404s
+  document.querySelectorAll('iframe[src="https://undefined"]').forEach(f => f.setAttribute('src', 'about:blank'));
   // Swap the Wix Google Maps iframe for our own map element
   document.querySelectorAll('iframe[src*="googleMap"], iframe[title*="Google Maps" i]').forEach(f => {
     const d = document.createElement('div');
