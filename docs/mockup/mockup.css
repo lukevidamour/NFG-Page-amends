@@ -8,7 +8,10 @@ html.mk-dubai { --mk-accent: #1090A8; }  /* keep in sync with TEAL_HEX in build.
 /* CH | DXB site toggle */
 .mk-toggle a { color: inherit !important; opacity: .55; text-decoration: none !important; transition: opacity .2s, color .2s; }
 .mk-toggle a:hover { opacity: 1; }
-.mk-toggle a.mk-on { opacity: 1; text-decoration: underline !important; text-underline-offset: 4px; text-decoration-thickness: 1px; }
+.mk-toggle a.mk-on { opacity: 1; }
+/* Each site keeps its own accent: CH gold, DXB teal (active + hover) */
+.mk-toggle a[data-site="CH"].mk-on, .mk-toggle a[data-site="CH"]:hover { color: #A08455 !important; opacity: 1; }
+.mk-toggle a[data-site="DXB"].mk-on, .mk-toggle a[data-site="DXB"]:hover { color: #1090A8 !important; opacity: 1; }
 .mk-toggle .mk-sep { margin: 0 .55em; opacity: .35; }
 .mk-toggle--header { margin-left: 18px; position: relative; }
 .mk-toggle--header::before {
@@ -38,4 +41,4 @@ html.mk-dubai .mk-on-dark, html.mk-dubai .mk-on-dark * { color: #5FBDCE !importa
 }
 
 /* Hero "On Point." sits on the teal N overlay: pale tint of the teal keeps it legible */
-html.mk-dubai .mk-hero-accent, html.mk-dubai .mk-hero-accent * { color: #A9DDE6 !important; text-shadow: 0 1px 12px rgba(0,0,0,.25); }
+html.mk-dubai .mk-hero-accent, html.mk-dubai .mk-hero-accent * { color: #4FBCD0 !important; text-shadow: 0 1px 14px rgba(0,0,0,.35); }
