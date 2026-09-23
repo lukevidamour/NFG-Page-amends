@@ -226,6 +226,11 @@ function dubaiTransform({ page, office, postHref }) {
 
 // ---------- Build ----------
 
+// cache-bust the mockup runtime so viewers never get a stale copy after a push
+const VERSION = require('crypto').createHash('md5')
+  .update(fs.readFileSync(path.join(OUT, 'mockup/mockup.css')) + fs.readFileSync(path.join(OUT, 'mockup/mockup.js')))
+  .digest('hex').slice(0, 8);
+
 (async () => {
   const browser = await chromium.launch({ channel: 'chrome' });
   const ctx = await browser.newContext({ viewport: { width: 1440, height: 900 } });
@@ -259,9 +264,16 @@ function dubaiTransform({ page, office, postHref }) {
           .replace(/80,\s*66,\s*43/g, TEAL_DARK_RGB)
           .split('@@SWISS@@').join('../'.repeat(outDepth));
       }
+      // Mockup must never compete with the client's real site in search
+      const live = 'https://www.nfg.partners/' + pageRel.replace(/(^|\/)index\.html$/, '').replace(/\.html$/, '');
+      html = html
+        .replace(/<meta name="robots"[^>]*>/gi, '')
+        .replace(/<link rel="canonical"[^>]*>/gi, `<link rel="canonical" href="${live}">`)
+        .replace('</head>', '<meta name="robots" content="noindex, nofollow">\n</head>');
+
       html = html.split('@@ROOT@@').join(up)
-        .replace('</head>', `<link rel="stylesheet" href="${up}mockup/mockup.css">\n</head>`)
-        .replace('</body>', `<script src="${up}mockup/mockup.js"></script>\n</body>`);
+        .replace('</head>', `<link rel="stylesheet" href="${up}mockup/mockup.css?v=${VERSION}">\n</head>`)
+        .replace('</body>', `<script src="${up}mockup/mockup.js?v=${VERSION}"></script>\n</body>`);
 
       const dest = path.join(OUT, site === 'dubai' ? 'dubai' : '', rel);
       fs.mkdirSync(path.dirname(dest), { recursive: true });
