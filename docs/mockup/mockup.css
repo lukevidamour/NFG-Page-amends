@@ -1,0 +1,41 @@
+/* Mockup additions, kept deliberately small so the captured Wix styling does the work */
+:root { --mk-accent: #A08455; }
+html.mk-dubai { --mk-accent: #1090A8; }  /* keep in sync with TEAL_HEX in build.js */
+
+/* Hover dropdowns */
+.mk-dropdown [class*="animationBox"] { transition: opacity .2s ease; }
+
+/* CH | DXB site toggle */
+.mk-toggle a { color: inherit !important; opacity: .55; text-decoration: none !important; transition: opacity .2s, color .2s; }
+.mk-toggle a:hover { opacity: 1; }
+.mk-toggle a.mk-on { opacity: 1; text-decoration: underline !important; text-underline-offset: 4px; text-decoration-thickness: 1px; }
+.mk-toggle .mk-sep { margin: 0 .55em; opacity: .35; }
+.mk-toggle--header { margin-left: 18px; position: relative; }
+.mk-toggle--header::before {
+  content: ""; position: absolute; left: -10px; top: 50%; width: 1px; height: 14px;
+  transform: translateY(-50%); background: currentColor; opacity: .25;
+}
+.mk-toggle--footer { display: inline-block; letter-spacing: .02em; }
+
+/* Teal accent on dark backgrounds: lighter tint of the teal for legibility */
+html.mk-dubai .mk-on-dark, html.mk-dubai .mk-on-dark * { color: #5FBDCE !important; }
+
+/* Office map */
+.mk-map { width: 100%; height: 100%; background: #242424; }
+.mk-pin svg path { fill: var(--mk-accent); stroke: rgba(0,0,0,.25); stroke-width: 1; }
+.mk-map .leaflet-popup-content-wrapper { border-radius: 8px; box-shadow: 0 2px 7px rgba(0,0,0,.3); }
+.mk-map .leaflet-popup-content { margin: 12px 16px; font: 13px/1.4 Arial, Helvetica, sans-serif; color: #000; }
+.mk-map .leaflet-popup-content a { color: #1a73e8; text-decoration: underline; }
+.mk-map .leaflet-control-attribution { font-size: 9px; background: rgba(255,255,255,.6); }
+
+/* Placeholder imagery tag */
+.mk-example { position: relative; }
+.mk-example-tag {
+  position: absolute; left: 8px; bottom: 8px; z-index: 5; pointer-events: none;
+  padding: 3px 7px; border-radius: 2px;
+  background: rgba(0,0,0,.55); color: #fff;
+  font: 10px/1.2 Arial, Helvetica, sans-serif; letter-spacing: .02em;
+}
+
+/* Hero "On Point." sits on the teal N overlay: pale tint of the teal keeps it legible */
+html.mk-dubai .mk-hero-accent, html.mk-dubai .mk-hero-accent * { color: #A9DDE6 !important; text-shadow: 0 1px 12px rgba(0,0,0,.25); }

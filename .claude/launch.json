@@ -1,0 +1,6 @@
+{
+  "version": "0.0.1",
+  "configurations": [
+    { "name": "nfg-mockup", "runtimeExecutable": "node", "runtimeArgs": ["/Users/lukevidamour/Documents/Claude Code Projects/NFG Page amends/serve.js"], "port": 8080 }
+  ]
+}

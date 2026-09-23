@@ -1,0 +1,6 @@
+{
+  "name": "nfg-dubai-mockup",
+  "private": true,
+  "scripts": { "build": "node build.js", "serve": "node serve.js" },
+  "devDependencies": { "playwright": "^1.63.0" }
+}
