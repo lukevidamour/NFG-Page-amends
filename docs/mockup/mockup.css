@@ -19,6 +19,10 @@ html.mk-dubai { --mk-accent: #1090A8; }  /* keep in sync with TEAL_HEX in build.
   transform: translateY(-50%); background: currentColor; opacity: .25;
 }
 .mk-toggle--footer { display: inline-block; letter-spacing: .02em; }
+.mk-toggle--menu {
+  position: absolute; left: 0; right: 0; bottom: 48px; z-index: 5; text-align: center;
+  color: #fff; font: 16px/1 Arial, Helvetica, sans-serif; letter-spacing: .06em;
+}
 
 /* Teal accent on dark backgrounds: lighter tint of the teal for legibility */
 html.mk-dubai .mk-on-dark, html.mk-dubai .mk-on-dark * { color: #5FBDCE !important; }

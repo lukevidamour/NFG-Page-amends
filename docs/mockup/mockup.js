@@ -205,8 +205,38 @@
     update();
   }
 
+  // ---- Mobile menu (Wix MenuContainer): same classes Wix toggles on open ----
+  function wireMobileMenu() {
+    var inner = document.querySelector('[data-block-level-container="MenuContainer"]');
+    if (!inner) return;
+    var root = document.getElementById(inner.id.replace(/^container-/, ''));
+    var overlay = document.getElementById('overlay-' + root.id);
+    var OPEN = ['Wy7QN0', 'B_nptD'];
+    function set(open) {
+      OPEN.forEach(function (c) { root.classList.toggle(c, open); });
+      [overlay, inner].forEach(function (el) {
+        if (!el) return;
+        el.style.visibility = open ? 'inherit' : '';
+        if (el === overlay) el.style.opacity = open ? '1' : '';
+      });
+      document.body.classList.toggle('siteScrollingBlocked', open);
+    }
+    document.addEventListener('click', function (e) {
+      if (e.target.closest('[aria-label="Open Site Navigation"]')) { e.preventDefault(); set(true); }
+      else if (e.target.closest('[aria-label="Close Site Navigation"]') || (root.contains(e.target) && e.target.closest('a'))) set(false);
+    });
+    document.addEventListener('keydown', function (e) { if (e.key === 'Escape') set(false); });
+    // CH | DXB inside the menu, since the header toggle is hidden on phones
+    var t = document.createElement('div');
+    t.className = 'mk-toggle mk-toggle--menu';
+    t.innerHTML = toggleHTML();
+    inner.appendChild(t);
+    bindToggle(t);
+  }
+
   function init() {
     geoDefault();
+    wireMobileMenu();
     wireHeaderScroll();
     addHeaderToggle();
     addFooterToggle();
